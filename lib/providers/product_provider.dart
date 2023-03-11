@@ -7,7 +7,6 @@ class ProductProvider with ChangeNotifier {
 
   List<ProductModel> search = [];
   productModels(QueryDocumentSnapshot element) {
-    
     productModel = ProductModel(
       productImage: element.get("productImage"),
       productName: element.get("productName"),
@@ -39,6 +38,7 @@ class ProductProvider with ChangeNotifier {
   }
 
   List<ProductModel> get getHerbsProductDataList {
+    print(herbsProductList);
     return herbsProductList;
   }
 
@@ -66,7 +66,7 @@ class ProductProvider with ChangeNotifier {
     return freshProductList;
   }
 
-//////////////// Root Product ///////////////////////////////////////
+////////////// Root Product ///////////////////////////////////////
 
   List<ProductModel> rootProductList = [];
 

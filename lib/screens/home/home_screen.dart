@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       MaterialPageRoute(
                         builder: (context) => ProductOverview(
                           productId: herbsProductData.productId as String,
-                          productPrice: herbsProductData.productPrice as int,
+                          productPrice: herbsProductData.productPrice as double,
                           productName: herbsProductData.productName as String,
                           productImage: herbsProductData.productImage as String,
                         ),
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   productId: herbsProductData.productId as String,
-                  productPrice: herbsProductData.productPrice as int,
+                  productPrice: herbsProductData.productPrice as double,
                   productImage: herbsProductData.productImage as String,
                   productName: herbsProductData.productName as String,
                   productUnit:herbsProductData ,
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           productId: freshProductData.productId as String,
                           productImage: freshProductData.productImage as String,
                           productName: freshProductData.productName as String,
-                          productPrice: freshProductData.productPrice as int,
+                          productPrice: freshProductData.productPrice as double,
                         ),
                       ),
                     );
@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   productId: freshProductData.productId as String,
                   productImage: freshProductData.productImage as String,
                   productName: freshProductData.productName as String,
-                  productPrice: freshProductData.productPrice as int,
+                  productPrice: freshProductData.productPrice as double,
                   productUnit:freshProductData,
                 );
               },
@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           productId: rootProductData.productId as String,
                           productImage: rootProductData.productImage as String,
                           productName: rootProductData.productName as String,
-                          productPrice: rootProductData.productPrice as int,
+                          productPrice: rootProductData.productPrice as double,
                         ),
                       ),
                     );
@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   productId: rootProductData.productId as String,
                   productImage: rootProductData.productImage as String,
                   productName: rootProductData.productName as String,
-                  productPrice: rootProductData.productPrice as int,
+                  productPrice: rootProductData.productPrice as double,
                   productUnit: rootProductData,
                 );
               },

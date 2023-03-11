@@ -7,7 +7,7 @@ import 'package:food_app/widgets/product_unit.dart';
 class SingalProduct extends StatefulWidget {
   final String? productImage;
   final String? productName;
-  final int? productPrice;
+  final double? productPrice;
   final VoidCallback? onTap;
   final String? productId;
   final ProductModel? productUnit;
@@ -28,7 +28,7 @@ class _SingalProductState extends State<SingalProduct> {
   var firstValue;
   @override
   Widget build(BuildContext context) {
-    widget.productUnit!.productUnit.firstWhere((element) {
+    widget.productUnit!.productUnit!.firstWhere((element) {
       setState(() {
         firstValue = element;
       });
@@ -97,7 +97,7 @@ class _SingalProductState extends State<SingalProduct> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: widget
-                                              .productUnit!.productUnit
+                                              .productUnit!.productUnit!
                                               .map<Widget>((data) {
                                             return Column(
                                               children: [
@@ -138,7 +138,7 @@ class _SingalProductState extends State<SingalProduct> {
                               productId: widget.productId,
                               productImage: widget.productImage,
                               productName: widget.productName,
-                              productPrice: widget.productPrice as double,
+                              productPrice: widget.productPrice,
                               productUnit: unitData == null?firstValue:unitData,
                             ),
                           ],

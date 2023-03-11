@@ -73,7 +73,7 @@ class _WishLsitState extends State<WishLsit> {
                 isBool: true,
                 productImage: data.productImage,
                 productName: data.productName,
-                productPrice: data.productPrice as double,
+                productPrice: data.productPrice,
                 productId: data.productId,
                 productQuantity: data.productQuantity,
                 onDelete: () {

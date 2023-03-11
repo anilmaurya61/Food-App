@@ -36,7 +36,7 @@ class _SingleItemState extends State<SingleItem> {
   int count=0;
   getCount() {
     setState(() {
-      count = int.parse((widget.productQuantity).toString());
+      // count = int.parse((widget.productQuantity).toString());
     });
   }
 

@@ -19,7 +19,8 @@ class CheckoutProvider with ChangeNotifier {
   TextEditingController city = TextEditingController();
   TextEditingController aera = TextEditingController();
   TextEditingController pincode = TextEditingController();
-  late LocationData setLoaction;
+  // TextEditingController setLoaction = TextEditingController();
+  late LocationData? setLoaction;
 
   void validator(context, myType) async {
     if (firstName.text.isEmpty) {
@@ -62,8 +63,8 @@ class CheckoutProvider with ChangeNotifier {
         "aera": aera.text,
         "pincode": pincode.text,
         "addressType": myType.toString(),
-        "longitude": setLoaction.longitude,
-        "latitude": setLoaction.latitude,
+        "longitude": setLoaction!.longitude,
+        "latitude": setLoaction!.latitude,
       }).then((value) async {
         isloadding = false;
         notifyListeners();

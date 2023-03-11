@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/config/colors.dart';
-import 'package:food_app/models/review_cart_model.dart';
 import 'package:food_app/providers/wishlist_provider.dart';
 import 'package:food_app/screens/review_cart/review_cart.dart';
 import 'package:food_app/widgets/count.dart';
@@ -15,7 +14,7 @@ enum SinginCharacter { fill, outline }
 class ProductOverview extends StatefulWidget {
   final String? productName;
   final String? productImage;
-  final int? productPrice;
+  final double? productPrice;
   final String? productId;
   ProductOverview(
       {this.productId, this.productImage, this.productName, this.productPrice});

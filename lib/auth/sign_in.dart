@@ -14,35 +14,66 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   late UserProvider userProvider;
+  // Future<User?> _googleSignUp() async {
+  //   final GoogleSignIn googleSignIn = GoogleSignIn(
+  //     scopes: ['email'],
+  //   );
+  //   final FirebaseAuth auth = FirebaseAuth.instance;
+  //   User? user;
+  //   try {
+  //   final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+  //   // if (googleUser != null) {
+  //     final GoogleSignInAuthentication googleAuth =
+  //         await googleUser!.authentication;
+
+  //     final AuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleAuth.accessToken,
+  //       idToken: googleAuth.idToken,
+  //     );
+      
+  //       final User? user = (await auth.signInWithCredential(credential)).user;
+  //       // print("signed in " + user.displayName);
+  //     } on FirebaseAuthException catch (e) {
+  //       if (e.code == 'account-exists-with-different-credential') {
+  //         // handle the error here
+  //       } else if (e.code == 'invalid-credential') {
+  //         // handle the error here
+  //       }
+  //     } catch (e) {
+  //       // handle the error here
+  //     }
+
   Future<User?> _googleSignUp() async {
-    try {
-      final GoogleSignIn _googleSignIn = GoogleSignIn(
-        scopes: ['email'],
-      );
-      final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: ['email'],
+  );
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
+  try {
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser!.authentication;
+    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
 
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
 
-      final User? user = (await _auth.signInWithCredential(credential)).user;
-      // print("signed in " + user.displayName);
-      userProvider.addUserData(
+    final UserCredential userCredential = await auth.signInWithCredential(credential);
+    user =  userCredential.user;
+    userProvider.addUserData(
         currentUser: user,
         userEmail: user!.email,
         userImage: user.photoURL,
         userName: user.displayName,
       );
       return user;
-    } catch (e) {
-      print(e);
-    }
+  } catch (e) {
+    // Handle errors here
+    print(e.toString());
+    return null;
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -123,3 +154,5 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
+
+

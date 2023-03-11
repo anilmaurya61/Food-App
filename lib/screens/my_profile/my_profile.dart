@@ -1,8 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/config/colors.dart';
 import 'package:food_app/models/user_model.dart';
 import 'package:food_app/providers/user_provider.dart';
 import 'package:food_app/screens/home/drawer_side.dart';
+import 'package:food_app/auth/sign_in.dart';
+import 'package:food_app/screens/my_profile/about.dart';
+import 'package:food_app/screens/my_profile/myorder.dart';
+import 'package:food_app/screens/my_profile/ordermodel.dart';
+import 'package:food_app/screens/my_profile/privacy_policy.dart';
+import 'package:food_app/screens/my_profile/referafriend.dart';
+import 'package:food_app/screens/my_profile/termsandcondition.dart';
 
 class MyProfile extends StatefulWidget {
   UserProvider? userProvider;
@@ -24,6 +32,67 @@ class _MyProfileState extends State<MyProfile> {
           leading: Icon(icon),
           title: Text(title as String),
           trailing: Icon(Icons.arrow_forward_ios),
+          onTap: () {
+            if (title == "My Orders") {
+              List<Order> orders = [
+              Order(
+                id: 1,
+                total: 25.99,
+                items: ['Apples', 'Bananas', 'Oranges'],
+              ),
+              Order(
+                id: 2,
+                total: 15.75,
+                items: ['Milk', 'Bread', 'Eggs'],
+              ),
+              Order(
+                id: 3,
+                total: 8.50,
+                items: ['Tomatoes', 'Lettuce'],
+              ),
+            ];
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyOrderPage(orders: orders)),
+              );
+            }
+            // if(title == "My Delivery Address")
+            if (title == "Refer A Friends") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ReferPage()),
+              );
+            }
+            if (title == "Terms & Conditions") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TermsAndConditionsPage()),
+              );
+            }
+            if (title == "Privacy Policy") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PrivacyPolicyPage()),
+              );
+            }
+            if (title == "About Us") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutUsPage()),
+              );
+            }
+            if (title == "Log Out") {
+              FirebaseAuth auth = FirebaseAuth.instance;
+              auth.signOut().then((res) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignIn()),
+                );
+              });
+            }
+          },
         )
       ],
     );
@@ -123,7 +192,7 @@ class _MyProfileState extends State<MyProfile> {
                         title: "Terms & Conditions"),
                     listTile(
                         icon: Icons.policy_outlined, title: "Privacy Policy"),
-                    listTile(icon: Icons.add_chart, title: "About"),
+                    listTile(icon: Icons.add_chart, title: "About Us"),
                     listTile(
                         icon: Icons.exit_to_app_outlined, title: "Log Out"),
                   ],

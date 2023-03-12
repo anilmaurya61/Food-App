@@ -20,7 +20,7 @@ class CheckoutProvider with ChangeNotifier {
   TextEditingController aera = TextEditingController();
   TextEditingController pincode = TextEditingController();
   // TextEditingController setLoaction = TextEditingController();
-  late LocationData? setLoaction;
+  LocationData? setLoaction;
 
   void validator(context, myType) async {
     if (firstName.text.isEmpty) {

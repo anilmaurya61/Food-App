@@ -28,7 +28,7 @@
 //           status: PaymentItemStatus.final_price,
 //         )
 //       ],
-//       style: GooglePayButtonStyle .black,
+//       style: GooglePayButtonStyle.black,
 //       type: GooglePayButtonType.pay,
 //       onPaymentResult: onGooglePayResult,
 //     );

@@ -48,7 +48,7 @@ dependencies:
   fluttertoast: ^8.0.8
   location:
   google_maps_flutter:
-  pay: ^1.0.6
+  pay: ^1.1.0
   firebase_core: ^2.7.0
 dev_dependencies:
   flutter_test:

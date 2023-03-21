@@ -26,6 +26,8 @@ class SingalProduct extends StatefulWidget {
 class _SingalProductState extends State<SingalProduct> {
   var unitData;
   var firstValue;
+
+
   @override
   Widget build(BuildContext context) {
     widget.productUnit!.productUnit!.firstWhere((element) {
@@ -76,7 +78,7 @@ class _SingalProductState extends State<SingalProduct> {
                           ),
                         ),
                         Text(
-                          '${widget.productPrice}\$/${unitData == null?firstValue:unitData}',
+                          '${widget.productPrice}\$/${unitData == null ? firstValue : unitData}',
                           style: TextStyle(
                             color: Colors.grey,
                           ),
@@ -92,43 +94,84 @@ class _SingalProductState extends State<SingalProduct> {
                                   showModalBottomSheet(
                                       context: context,
                                       builder: (context) {
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: widget
-                                              .productUnit!.productUnit!
-                                              .map<Widget>((data) {
-                                            return Column(
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 10),
-                                                  child: InkWell(
-                                                    onTap: () async {
-                                                      setState(() {
-                                                        unitData = data;
-                                                      });
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text(
-                                                      data,
-                                                      style: TextStyle(
-                                                          color: primaryColor,
-                                                          fontSize: 18),
-                                                    ),
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          SizedBox(height: 20.0),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: widget.productUnit!.productUnit!.map<Widget>((data) {
+                                              bool isSelected = data == unitData || (unitData == null && data == widget.productUnit!.productUnit![0]);
+                                              return InkWell(
+                                                onTap: () async {
+                                                  setState(() {
+                                                    unitData = data;
+                                                  });
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Container(
+                                                  margin: const EdgeInsets.symmetric(vertical: 2.0),
+                                                  padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.grey.withOpacity(0.2),
+                                                        blurRadius: 2.0,
+                                                        spreadRadius: 1.0,
+                                                        offset: Offset(0.0, 2.0),
+                                                      ),
+                                                    ],
+                                                    borderRadius: BorderRadius.circular(10.0),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: <Widget>[
+                                                      Expanded(
+                                                        child: Align(
+                                                          alignment: Alignment.centerLeft,
+                                                          child: Text(
+                                                            data,
+                                                            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Align(
+                                                          alignment: Alignment.centerRight,
+                                                          child: Text(
+                                                            '₹10',
+                                                            textAlign: TextAlign.right,
+                                                            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Center(
+                                                          child: Row(
+                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                            children: [
+                                                              if (isSelected)
+                                                                Icon(
+                                                                  Icons.check,
+                                                                  color: Colors.green,
+                                                                ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                              ],
-                                            );
-                                          }).toList(),
-                                        );
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ],
+                                      );
                                       });
                                 },
-                                title: unitData == null?firstValue:unitData,
+                                title: unitData == null ? firstValue : unitData,
                               ),
                             ),
                             SizedBox(
@@ -139,7 +182,8 @@ class _SingalProductState extends State<SingalProduct> {
                               productImage: widget.productImage,
                               productName: widget.productName,
                               productPrice: widget.productPrice,
-                              productUnit: unitData == null?firstValue:unitData,
+                              productUnit:
+                                  unitData == null ? firstValue : unitData,
                             ),
                           ],
                         ),

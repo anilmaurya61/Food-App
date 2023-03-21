@@ -8,6 +8,8 @@ import 'package:food_app/screens/review_cart/review_cart.dart';
 import 'package:food_app/screens/search/search.dart';
 import 'package:provider/provider.dart';
 import 'drawer_side.dart';
+import 'package:food_app/screens/my_profile/my_profile.dart';
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -222,15 +224,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: textColor),
         title: Text(
-          'Home',
+          'Zoggrey',
           style: TextStyle(color: textColor, fontSize: 17),
         ),
         actions: [
-          CircleAvatar(
-            radius: 15,
-            backgroundColor: Color(0xffd6d382),
-            child: IconButton(
-              onPressed: () {
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: GestureDetector(
+              onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) =>
@@ -238,28 +239,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              icon: Icon(
-                Icons.search,
-                size: 17,
-                color: textColor,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ReviewCart(),
-                  ),
-                );
-              },
               child: CircleAvatar(
                 backgroundColor: Color(0xffd6d382),
                 radius: 15,
                 child: Icon(
-                  Icons.shop,
+                  Icons.search,
                   size: 17,
                   color: textColor,
                 ),
@@ -268,6 +252,51 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+
+      /////////////////////// Bottom AppBar //////////////////////
+      
+  floatingActionButton:FloatingActionButton( 
+      onPressed: (){
+          Navigator.of(context).push(
+          MaterialPageRoute(
+          builder: (context) => ReviewCart(),
+            ),
+          );
+      },
+      child: Icon(Icons.shopping_cart), 
+  ),
+
+  floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+  bottomNavigationBar: BottomAppBar( 
+    color:Colors.redAccent,
+    shape: CircularNotchedRectangle(), //shape of notch
+    notchMargin: 5, //notche margin between floating button and bottom appbar
+    child: Row( //children inside bottom appbar
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        IconButton(icon: Icon(Icons.home, color: Colors.black,), onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ),
+          );
+        },),
+        IconButton(icon: Icon(Icons.account_circle, color: Colors.white,), onPressed: () {
+          // Navigator.of(context).push(
+          //         MaterialPageRoute(
+          //           builder: (context) => MyProfile(userProvider:widget.userProvider as UserProvider),
+          //         ),
+          //       );
+        },),
+        Padding(
+          padding: EdgeInsets.only(right:90),
+          child:IconButton(icon: Icon(Icons.favorite, color: Colors.white,), onPressed: () {},),
+        )
+      ],
+    ),
+  ),
+      ////////////////////////////////////////////////////////////////////////////
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: ListView(

@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CheckoutProvider(),
         ),
       ],
+      
       child: MaterialApp(
         theme: ThemeData(
             primaryColor: primaryColor,

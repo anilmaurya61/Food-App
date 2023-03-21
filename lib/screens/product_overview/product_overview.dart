@@ -195,7 +195,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                             ),
                           ],
                         ),
-                        Text("\$${widget.productPrice}"),
+                        Text("\₹${widget.productPrice}"),
                         Count(
                           productId: widget.productId,
                           productImage: widget.productImage,

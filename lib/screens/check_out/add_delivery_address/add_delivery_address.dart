@@ -60,15 +60,11 @@ class _AddDeliverAddressState extends State<AddDeliverAddress> {
         child: ListView(
           children: [
             CostomTextField(
-              labText: "First name",
-              controller: checkoutProvider.firstName,
+              labText: "Full Name*",
+              controller: checkoutProvider.fullName,
             ),
             CostomTextField(
-              labText: "Last name",
-              controller: checkoutProvider.lastName,
-            ),
-            CostomTextField(
-              labText: "Mobile No",
+              labText: "Mobile No*",
               controller: checkoutProvider.mobileNo,
             ),
             CostomTextField(
@@ -76,49 +72,46 @@ class _AddDeliverAddressState extends State<AddDeliverAddress> {
               controller: checkoutProvider.alternateMobileNo,
             ),
             CostomTextField(
-              labText: "Scoiety",
-              controller: checkoutProvider.scoiety,
-            ),
-            CostomTextField(
-              labText: "Street",
-              controller: checkoutProvider.street,
-            ),
-            CostomTextField(
               labText: "Landmark",
               controller: checkoutProvider.landmark,
             ),
             CostomTextField(
-              labText: "City",
+              labText: "City*",
               controller: checkoutProvider.city,
             ),
             CostomTextField(
-              labText: "Aera",
-              controller: checkoutProvider.aera,
+              labText: "Address*",
+              controller: checkoutProvider.address,
             ),
             CostomTextField(
-              labText: "Pincode",
+              labText: "Pincode*",
               controller: checkoutProvider.pincode,
             ),
             InkWell(
-              onTap: () {
-               Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => CostomGoogleMap(),
+              child:ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                      MaterialPageRoute(
+                         builder: (context) => CostomGoogleMap(),
+                       ),
+                    );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                    ),
+                    child: Container(
+                      height: 47,
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          checkoutProvider.setLoaction == null? Text("Set Loaction"):
+                          Text("Done!"),
+                        ],
+                      ),
+                    ),
                   ),
-                );
-              },
-              child: Container(
-                height: 47,
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    checkoutProvider.setLoaction == null? Text("Set Loaction"):
-                    Text("Done!"),
-                  ],
-                ),
-              ),
             ),
             Divider(
               color: Colors.black,

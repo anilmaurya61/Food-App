@@ -59,15 +59,15 @@ class _PaymentSummaryState extends State<PaymentSummary> {
           width: 160,
           child: MaterialButton(
             onPressed: () {
-              // myType == AddressTypes.OnlinePayment
-              //     ? Navigator.of(context).push(
-              //         MaterialPageRoute(
-              //           builder: (context) => MyGooglePay(
-              //             total: total,
-              //           ),
-              //         ),
-              //       )
-              //     : Container();
+              myType == AddressTypes.OnlinePayment
+                  ? Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MyGooglePay(
+                          total: total,
+                        ),
+                      ),
+                    )
+                  : Container();
             
             },
             child: Text(
@@ -92,9 +92,9 @@ class _PaymentSummaryState extends State<PaymentSummary> {
               children: [
                 SingleDeliveryItem(
                   address:
-                      "aera, ${widget.deliverAddressList!.aera}, street, ${widget.deliverAddressList!.street}, society ${widget.deliverAddressList!.scoirty}, pincode ${widget.deliverAddressList!.pinCode}",
+                      "aera, ${widget.deliverAddressList!.address}, street, pincode ${widget.deliverAddressList!.pinCode}",
                   title:
-                      "${widget.deliverAddressList!.firstName} ${widget.deliverAddressList!.lastName}",
+                      "${widget.deliverAddressList!.fullName} ",
                   number: widget.deliverAddressList!.mobileNo,
                   addressType: widget.deliverAddressList!.addressType ==
                           "AddressTypes.Home"

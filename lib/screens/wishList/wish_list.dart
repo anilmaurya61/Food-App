@@ -50,6 +50,13 @@ class _WishLsitState extends State<WishLsit> {
   }
 
   @override
+  void initState() {
+    WishListProvider intitwishListProvider =
+        Provider.of(context, listen: false);
+    intitwishListProvider.getWishtListData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     wishListProvider = Provider.of(context);
     wishListProvider.getWishtListData();
@@ -70,14 +77,16 @@ class _WishLsitState extends State<WishLsit> {
                 height: 10,
               ),
               SingleItem(
-                isBool: true,
-                productImage: data.productImage,
-                productName: data.productName,
-                productPrice: data.productPrice,
-                productId: data.productId,
-                productQuantity: data.productQuantity,
+                      isBool: true,
+                      wishList: false,
+                      productImage: data.productImage,
+                      productName: data.productName,
+                      productPrice: data.productPrice as double,
+                      productId: data.productId,
+                      productQuantity: data.productQuantity,
+                      productUnit: data.productUnit,
                 onDelete: () {
-                  showAlertDialog(context,data);
+                  showAlertDialog(context, data);
                 },
               ),
             ],

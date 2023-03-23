@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:food_app/auth/sign_in.dart';
 import 'package:food_app/config/colors.dart';
+import 'package:food_app/providers/category_provider.dart';
 import 'package:food_app/providers/check_out_provider.dart';
 import 'package:food_app/providers/product_provider.dart';
 import 'package:food_app/providers/review_cart_provider.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<CategoryProvider>(
+          create: (context) => CategoryProvider(),
+        ),
         ChangeNotifierProvider<ProductProvider>(
           create: (context) => ProductProvider(),
         ),

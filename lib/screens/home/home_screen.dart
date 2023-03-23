@@ -7,8 +7,11 @@ import 'package:food_app/screens/home/singal_product.dart';
 import 'package:food_app/screens/review_cart/review_cart.dart';
 import 'package:food_app/screens/search/search.dart';
 import 'package:provider/provider.dart';
+import '../../models/category_model.dart';
+import '../wishList/wish_list.dart';
 import 'drawer_side.dart';
 import 'package:food_app/screens/my_profile/my_profile.dart';
+import 'package:food_app/providers/category_provider.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -18,6 +21,41 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   ProductProvider? productProvider;
+  CategoryProvider? categoryProvider;
+  late List<CategoryModel> categories;
+
+  Widget _buildcategory(context) {
+    return Container(
+      height: 100,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: categories.length,
+        itemBuilder: (BuildContext context, int index) {
+          final category = categories[index];
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: [
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    shape: BoxShape.circle,
+                  ),
+                  child: ClipOval(
+                    child: Image.network(category.categoryImage as String),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(category.categoryName as String),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   Widget _buildHerbsProduct(context) {
     return Column(
@@ -69,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   productPrice: herbsProductData.productPrice as double,
                   productImage: herbsProductData.productImage as String,
                   productName: herbsProductData.productName as String,
-                  productUnit:herbsProductData ,
+                  productUnit: herbsProductData,
                 );
               },
             ).toList(),
@@ -132,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   productImage: freshProductData.productImage as String,
                   productName: freshProductData.productName as String,
                   productPrice: freshProductData.productPrice as double,
-                  productUnit:freshProductData,
+                  productUnit: freshProductData,
                 );
               },
             ).toList(),
@@ -141,7 +179,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
-
 
   Widget _buildRootProduct() {
     return Column(
@@ -205,6 +242,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    CategoryProvider intitcategoryProvider =
+        Provider.of(context, listen: false);
+    intitcategoryProvider.fatchCategoryListData();
+    categoryProvider = Provider.of<CategoryProvider>(context, listen: false);
+    if (categoryProvider != null) {
+      categories = categoryProvider!.getcategoryList;
+    } 
+
     ProductProvider initproductProvider = Provider.of(context, listen: false);
     initproductProvider.fatchHerbsProductData();
     initproductProvider.fatchFreshProductData();
@@ -254,53 +299,80 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       /////////////////////// Bottom AppBar //////////////////////
-      
-  floatingActionButton:FloatingActionButton( 
-      onPressed: (){
-          Navigator.of(context).push(
-          MaterialPageRoute(
-          builder: (context) => ReviewCart(),
-            ),
-          );
-      },
-      child: Icon(Icons.shopping_cart), 
-  ),
 
-  floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-  bottomNavigationBar: BottomAppBar( 
-    color:Colors.redAccent,
-    shape: CircularNotchedRectangle(), //shape of notch
-    notchMargin: 5, //notche margin between floating button and bottom appbar
-    child: Row( //children inside bottom appbar
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        IconButton(icon: Icon(Icons.home, color: Colors.black,), onPressed: () {
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => HomeScreen(),
+              builder: (context) => ReviewCart(),
             ),
           );
-        },),
-        IconButton(icon: Icon(Icons.account_circle, color: Colors.white,), onPressed: () {
-          // Navigator.of(context).push(
-          //         MaterialPageRoute(
-          //           builder: (context) => MyProfile(userProvider:widget.userProvider as UserProvider),
-          //         ),
-          //       );
-        },),
-        Padding(
-          padding: EdgeInsets.only(right:90),
-          child:IconButton(icon: Icon(Icons.favorite, color: Colors.white,), onPressed: () {},),
-        )
-      ],
-    ),
-  ),
+        },
+        child: Icon(Icons.shopping_cart_outlined),
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        elevation: 8, // Add shadow to the bottom app bar
+        shape: CircularNotchedRectangle(),
+        notchMargin: 5,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.home_outlined,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.account_circle_outlined,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MyProfile(userProvider: userProvider),
+                  ),
+                );
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 90),
+              child: IconButton(
+                icon: Icon(
+                  Icons.favorite_border,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => WishLsit(),
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+
       ////////////////////////////////////////////////////////////////////////////
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: ListView(
           children: [
+            _buildcategory(context),
             Container(
               height: 150,
               decoration: BoxDecoration(

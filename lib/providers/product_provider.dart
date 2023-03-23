@@ -29,7 +29,7 @@ class ProductProvider with ChangeNotifier {
     value.docs.forEach(
       (element) {
         productModels(element);
-
+        // print(element.data());
         newList.add(productModel);
       },
     );
@@ -38,7 +38,7 @@ class ProductProvider with ChangeNotifier {
   }
 
   List<ProductModel> get getHerbsProductDataList {
-    print(herbsProductList);
+    // print(herbsProductList);
     return herbsProductList;
   }
 

@@ -125,8 +125,7 @@ class _MyProfileState extends State<MyProfile> {
                 color: primaryColor,
               ),
               Container(
-                height: 548,
-                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.7921,                width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 decoration: BoxDecoration(
                   color: scaffoldBackgroundColor,

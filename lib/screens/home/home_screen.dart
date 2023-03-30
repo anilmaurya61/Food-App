@@ -244,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     CategoryProvider intitcategoryProvider =
         Provider.of(context, listen: false);
-    intitcategoryProvider.fatchCategoryListData();
+    intitcategoryProvider.fetchCategoryListData();
     categoryProvider = Provider.of<CategoryProvider>(context, listen: false);
     if (categoryProvider != null) {
       categories = categoryProvider!.getcategoryList;

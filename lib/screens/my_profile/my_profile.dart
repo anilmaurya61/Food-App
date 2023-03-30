@@ -61,7 +61,7 @@ class _MyProfileState extends State<MyProfile> {
             if (title == "Refer A Friends") {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ReferPage()),
+                MaterialPageRoute(builder: (context) => ReferFriendPage()),
               );
             }
             if (title == "Terms & Conditions") {
